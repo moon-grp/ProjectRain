@@ -38,14 +38,14 @@ const BootCampSchema = new mongoose.Schema({
         type:String,
         required:[true,"please add an address"]
     },
-    location:{
+  /*  location:{
         type:{
             type:String,
             enum:['Point'],
-            required:true
+           // required:true
         },
         coordinates:{
-            type:[Number],
+            type:Number,
             required:true,
             index:'2dsphere'
         },
@@ -56,7 +56,7 @@ const BootCampSchema = new mongoose.Schema({
         zipcode:String,
         country:String
 
-    },
+    }, */
     carrers:{
         type:[String],
         required:true,
@@ -102,4 +102,4 @@ const BootCampSchema = new mongoose.Schema({
 
 
 
-module.exports= mongoose.model("Bootcamps", BootCampSchema )
+module.exports= mongoose.model("Bootcamp", BootCampSchema )
