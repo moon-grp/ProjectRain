@@ -50,4 +50,35 @@ router.get("/getbootcamp/:id", async (req, res, next) => {
   }
 });
 
+router.put("/updatebootcamp/:id", async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!bootcamp) {
+      res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true, data: bootcamp });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+});
+
+router.delete("/deletebootcamp/:id", async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
+
+    if (!bootcamp) {
+      res.status(400).json({ success: false });
+    }
+
+    res.status(200).json({ success: true, data: bootcamp });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+});
+
 module.exports = router;
