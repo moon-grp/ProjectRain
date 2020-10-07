@@ -14,12 +14,12 @@ const router = express.Router();
 //router.route("/").get(getbootcamps).post(createbootcamp)
 //router.route("/:id").post(createbootcamp)
 
-router.get("/getbootcamps",async (req, res, next) => {
+router.get("/getbootcamps", async (req, res, next) => {
   try {
     const bootcamp = await Bootcamp.find();
-    res.status(200).json({success:true,data:bootcamp})
+    res.status(200).json({ success: true, data: bootcamp });
   } catch (error) {
-    res.status(400).json({succes:false})
+    res.status(400).json({ succes: false });
   }
 });
 
@@ -32,11 +32,22 @@ router.post("/createbootcamp", async (req, res, next) => {
       data: bootcamp,
     });
   } catch (error) {
-    res.status(400).json({success:false})
+    res.status(400).json({ success: false });
   }
 });
 
+router.get("/getbootcamp/:id", async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.findById(req.params.id);
 
+    res.status(200).json({ success: true, data: bootcamp });
 
+    if (!bootcamp) {
+      res.status(400).json({ success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
+});
 
 module.exports = router;
