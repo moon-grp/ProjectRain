@@ -75,7 +75,7 @@ router.delete("/deletebootcamp/:id", async (req, res, next) => {
       res.status(400).json({ success: false });
     }
 
-    res.status(200).json({ success: true, data: bootcamp });
+    res.status(200).json({ success: true, data:{}});
   } catch (error) {
     res.status(400).json({ success: false });
   }
