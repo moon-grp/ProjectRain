@@ -1,5 +1,6 @@
 const express = require("express");
 const Bootcamp = require("../models/Bootcamps");
+const ErrorResponse = require("../utils/errorResponse");
 
 //const { getbootcamps, createbootcamp } = require("../controllers/bootcamp");
 
@@ -43,10 +44,14 @@ router.get("/getbootcamp/:id", async (req, res, next) => {
     res.status(200).json({ success: true, data: bootcamp });
 
     if (!bootcamp) {
-      res.status(400).json({ success: false });
+      // res.status(400).json({ success: false });
+      return next(
+        new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404)
+      );
     }
   } catch (error) {
-    res.status(400).json({ success: false });
+    //  res.status(400).json({ success: false });
+    next(new ErrorResponse(`Bootcamp not found with id ${req.params.id}`, 404));
   }
 });
 
@@ -75,7 +80,7 @@ router.delete("/deletebootcamp/:id", async (req, res, next) => {
       res.status(400).json({ success: false });
     }
 
-    res.status(200).json({ success: true, data:{}});
+    res.status(200).json({ success: true, data: {} });
   } catch (error) {
     res.status(400).json({ success: false });
   }

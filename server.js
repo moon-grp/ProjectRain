@@ -4,13 +4,14 @@ const bootcamp = require("./routes/bootcamp");
 const logger = require("./middleware/logger");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
+const errorHandler = require("./middleware/error");
 
 dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 //app.use(logger);
 
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV == "development") {
 
 app.use("/api/v1", bootcamp);
 
-
+app.use(errorHandler);
 
 /*app.get("/api/v1/bootcamps", (req, res) => {
   // res.send("hello from express");
